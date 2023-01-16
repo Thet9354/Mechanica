@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#15202B"
+    tools:context=".Fragments.AddProgress">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Another day another session"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Select your progress level"
+                android:layout_marginTop="80dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
+
+                <AutoCompleteTextView
+                    android:id="@+id/filled_exposed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none">
+                </AutoCompleteTextView>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.5dp"-->
+<!--                android:background="@android:color/darker_gray"-->
+<!--                android:layout_marginTop="30dp"/>-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editTxtInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/ic_percentage"
+                app:helperText="Required*"
+                app:endIconMode="clear_text"
+                app:helperTextTextColor="@android:color/holo_red_dark"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginTop="40dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="2"
+                android:hint="Pull Percentage"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTxt_pullPercent"
+                    android:layout_width="match_parent"
+                    android:inputType="number"
+                    android:layout_height="wrap_content"
+                    android:maxLength="2"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_btn"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="25dp"
+                android:clickable="true"
+                android:layout_marginEnd="25dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/green_button_bg_ripple"
+                android:layout_marginTop="300dp">
+
+                <TextView
+                    android:id="@+id/btn_saveProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:text="Save Progress"
+                    android:layout_centerInParent="true"/>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    app:lottie_rawRes="@raw/cirlce_loading"
+                    android:id="@+id/btn_animation"
+                    app:lottie_loop="true"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"/>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,5 +1,7 @@
 package com.example.mechanica;
 
+import android.annotation.SuppressLint;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,14 +10,15 @@ import java.sql.Statement;
 
 public class DatabaseHelper {
 
-    private Connection connection;
+    private final Connection connection;
     private Statement statement;
     private ResultSet resultSet;
 
     public DatabaseHelper() throws ClassNotFoundException, SQLException {
         // Connection string
-        String connectionString = "jdbc:sqlserver://thet.database.windows.net:1433;database=ThetDB;user=CloudSA0eb34ac8@thet;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+        @SuppressLint("AuthLeak") String connectionString = "jdbc:sqlserver://thet.database.windows.net:1433;database=ThetDB;user=CloudSA0eb34ac8@thet;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
 
+        DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 
         // Open connection
         connection = DriverManager.getConnection(connectionString);

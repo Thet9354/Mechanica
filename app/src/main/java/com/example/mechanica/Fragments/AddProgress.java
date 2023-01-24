@@ -158,32 +158,16 @@ public class AddProgress extends Fragment {
     }
 
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        try {
-            databaseHelper.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     private boolean validatePullPercent() {
 
         pullPercent = editTxt_pullPercent.getText().toString();
 
-        if (pullPercent.isEmpty())
-            return false;
-        else
-            return true;
+        return !pullPercent.isEmpty();
     }
 
     private boolean validateLevel() {
 
-        if (level.isEmpty())
-            return false;
-        else
-            return true;
+        return !level.isEmpty();
     }
 
     private void initUI() {

@@ -17,9 +17,9 @@ import java.util.ArrayList;
 
 public class PastProgressAdapter extends RecyclerView.Adapter<PastProgressAdapter.CardViewHolder>{
 
-    private Context mcontext;
+    private final Context mcontext;
 
-    private ArrayList<Progress> progressArrayList;
+    private final ArrayList<Progress> progressArrayList;
 
     public PastProgressAdapter(Context mcontext, ArrayList<Progress> progressArrayList) {
         this.mcontext = mcontext;
@@ -65,9 +65,11 @@ public class PastProgressAdapter extends RecyclerView.Adapter<PastProgressAdapte
 
     public class CardViewHolder extends RecyclerView.ViewHolder {
 
-        private CardView cv_pastProgress;
+        private final CardView cv_pastProgress;
 
-        private TextView txtView_difficulty, txtView_pullPercent, txtView_date;
+        private final TextView txtView_difficulty;
+        private final TextView txtView_pullPercent;
+        private final TextView txtView_date;
 
         public CardViewHolder(@NonNull View v) {
             super(v);

@@ -44,7 +44,7 @@ public class SettingsPage_Activity extends AppCompatActivity {
 
     private userSettingModel settingModel;
 
-    private String CHECKEDITEM = "checked_item";
+    private final String CHECKEDITEM = "checked_item";
 
     private String personName;
     private String personEmail;

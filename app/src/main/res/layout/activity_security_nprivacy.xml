@@ -49,7 +49,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Manage what information you see and share on NS Nitro."
+                android:text="Manage what information you see and share on Mechanica."
                 android:gravity="left"
                 android:layout_marginTop="80dp"
                 android:textColor="@color/white"/>
@@ -196,7 +196,7 @@
                 android:id="@+id/txtView_privacyTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Learn more about privacy on NS Nitro"
+                android:text="Learn more about privacy on Mechanica"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="20dp"

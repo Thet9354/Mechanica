@@ -3,6 +3,7 @@ package com.example.mechanica;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
@@ -17,6 +18,10 @@ public class HomePage_Activity extends AppCompatActivity {
     private RelativeLayout fragment_container;
     private ChipNavigationBar bottom_nav_bar;
 
+    private Intent intent;
+
+    private String mName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +29,8 @@ public class HomePage_Activity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home_page);
+
+        intent = getIntent();
 
         initWidget();
     }
@@ -33,7 +40,15 @@ public class HomePage_Activity extends AppCompatActivity {
         bottom_nav_bar = findViewById(R.id.bottom_nav_bar);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home()).commit();
         bottom_nav_bar.setItemSelected(R.id.nav_home, true);
+
+        getIntentData();
+
         bottomMenu();
+    }
+
+    private void getIntentData() {
+
+        mName = intent.getStringExtra("Name");
     }
 
     private void bottomMenu() {
@@ -55,6 +70,9 @@ public class HomePage_Activity extends AppCompatActivity {
                         fragment = new ViewProgress();
                         break;
                 }
+                Bundle bundle = new Bundle();
+                bundle.putString("Name", mName);
+                fragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
             }
         });

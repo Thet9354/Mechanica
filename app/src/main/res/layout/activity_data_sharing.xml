@@ -48,7 +48,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Allow sharing of additional information with Twitter's business partners."
+                android:text="Allow sharing of additional information with Mechanica's business partners."
                 android:gravity="left"
                 android:layout_marginTop="80dp"
                 android:textColor="@color/white"/>

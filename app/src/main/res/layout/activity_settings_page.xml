@@ -39,7 +39,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/profile_pic_icon" />
+                android:src="@drawable/mechanica_icon" />
 
             <TextView
                 android:id="@+id/txtView_FullName"

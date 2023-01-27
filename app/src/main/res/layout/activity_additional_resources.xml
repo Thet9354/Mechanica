@@ -48,7 +48,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Check out other places for helpful information to learn more about NS Nitro products and services."
+                android:text="Check out other places for helpful information to learn more about Mechanica products and services."
                 android:gravity="left"
                 android:layout_marginTop="80dp"
                 android:textColor="@color/white"/>
@@ -90,7 +90,8 @@
                         android:layout_below="@+id/txtView_crashReport"
                         android:layout_marginTop="10dp"
                         android:layout_toLeftOf="@id/crashReport_switch"
-                        android:text="Automatically send crash reports to NS Nitro's service provider to help improve this application."
+                        android:textColor="@color/white"
+                        android:text="Automatically send crash reports to Mechanica's service provider to help improve this application."
                         android:textSize="12dp" />
 
                     <androidx.appcompat.widget.SwitchCompat

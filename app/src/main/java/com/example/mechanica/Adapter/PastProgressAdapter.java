@@ -12,49 +12,39 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mechanica.Model.Progress;
 import com.example.mechanica.R;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class PastProgressAdapter extends RecyclerView.Adapter<PastProgressAdapter.CardViewHolder>{
+public class PastProgressAdapter extends RecyclerView.Adapter<PastProgressAdapter.PastProgressViewHolder> {
 
-    private final Context mcontext;
+    Context mContext;
+    ArrayList<Progress> progressArrayList;
 
-    private final ArrayList<Progress> progressArrayList;
-
-    public PastProgressAdapter(Context mcontext, ArrayList<Progress> progressArrayList) {
-        this.mcontext = mcontext;
+    public PastProgressAdapter(Context mContext, ArrayList<Progress> progressArrayList) {
+        this.mContext = mContext;
         this.progressArrayList = progressArrayList;
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(View view, int position);
-    }
-
-    private PastProgressAdapter.OnItemClickListener mItemClickListener;
-
-    public void setOnItemClickListener(PastProgressAdapter.OnItemClickListener listener) {
-        this.mItemClickListener = listener;
-    }
-
-    // Easy access to the context object in the recyclerview
-    private Context getContext() {
-        return mcontext;
     }
 
     @NonNull
     @Override
-    public PastProgressAdapter.CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
+    public PastProgressAdapter.PastProgressViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(mContext).inflate(R.layout.row_progress, parent, false);
 
-        View itemView = LayoutInflater.from(context).
-                inflate(R.layout.row_progress, parent, false);
-
-        return new PastProgressAdapter.CardViewHolder(itemView);
+        return new PastProgressViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PastProgressAdapter.CardViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PastProgressAdapter.PastProgressViewHolder holder, int position) {
+
+        Progress progress = progressArrayList.get(position);
+
+        holder.txtView_difficulty.setText(progress.getLevel());
+        holder.txtView_pullPercent.setText(progress.getPullPercent());
 
     }
 
@@ -63,26 +53,15 @@ public class PastProgressAdapter extends RecyclerView.Adapter<PastProgressAdapte
         return progressArrayList.size();
     }
 
-    public class CardViewHolder extends RecyclerView.ViewHolder {
+    public class PastProgressViewHolder extends RecyclerView.ViewHolder {
 
-        private final CardView cv_pastProgress;
+        TextView txtView_difficulty, txtView_pullPercent, txtView_date;
 
-        private final TextView txtView_difficulty;
-        private final TextView txtView_pullPercent;
-        private final TextView txtView_date;
+        public PastProgressViewHolder(@NonNull View itemView) {
+            super(itemView);
 
-        public CardViewHolder(@NonNull View v) {
-            super(v);
-
-            //CardView
-            cv_pastProgress = v.findViewById(R.id.cv_pastProgress);
-
-            //TexView
-            txtView_difficulty = v.findViewById(R.id.txtView_difficulty);
-            txtView_pullPercent = v.findViewById(R.id.txtView_pullPercent);
-            txtView_date = v.findViewById(R.id.txtView_date);
-
-
+            txtView_difficulty = itemView.findViewById(R.id.txtView_difficulty);
+            txtView_pullPercent = itemView.findViewById(R.id.txtView_pullPercent);
         }
     }
 }

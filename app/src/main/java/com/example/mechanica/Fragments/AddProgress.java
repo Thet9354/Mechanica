@@ -1,6 +1,7 @@
 package com.example.mechanica.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -28,17 +29,24 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.mechanica.DatabaseHelper;
 import com.example.mechanica.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AddProgress extends Fragment {
 
     private Context mContext;
 
-    private DatabaseHelper databaseHelper;
 
     public static final int TIMER = 2000;
 
@@ -51,6 +59,13 @@ public class AddProgress extends Fragment {
     private LottieAnimationView btn_animation;
 
     private String level, pullPercent;
+
+    private String mName;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance("https://mechanica-1674603366861-default-rtdb.asia-southeast1.firebasedatabase.app/");
+    DatabaseReference databaseReference  = database.getReference().child("users");
+
+    FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,9 +97,17 @@ public class AddProgress extends Fragment {
         btn_animation = v.findViewById(R.id.btn_animation);
         editTxt_pullPercent = v.findViewById(R.id.editTxt_pullPercent);
 
+        getBundleData();
+
         initUI();
 
         pageDirectories();
+    }
+
+    private void getBundleData() {
+
+        Bundle bundle = getArguments();
+        mName = bundle.getString("Name");
     }
 
     private void pageDirectories() {
@@ -130,32 +153,40 @@ public class AddProgress extends Fragment {
         }
         else
         {
-            new AddData().execute(level, pullPercent);
+            AddData();
         }
     }
 
-    private class AddData extends AsyncTask<String, Void, Void> {
-        @Override
-        protected Void doInBackground(String... params) {
-            try {
+    private void AddData()  {
 
-                // Get the curent date and time
-                Date currentDate = new Date();
+                //Add data in the firebase
+//                databaseReference.child(mName).child("User's Progress Details").child("Level").setValue(level);
+//                databaseReference.child(mName).child("User's Progress Details").child("PullPercent").setValue(pullPercent);
 
-                //Set up the SimpleDataFormat object with the desired format
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-                String dateTimeString = dateFormat.format(currentDate);
-                System.out.println(dateTimeString);
 
-                databaseHelper = new DatabaseHelper();
-                databaseHelper.addData(params[0], params[1]);
-            } catch (SQLException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            return null;
+
+
+                //Implementing data into google firebase firestore
+                Map<String, Object> user = new HashMap<>();
+                user.put("Level", level);
+                user.put("PullPercent", pullPercent);
+
+                firestoreDB.collection("user")
+                        .add(user)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(mContext, "Progress Added", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(mContext, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
         }
-    }
 
 
     private boolean validatePullPercent() {
@@ -181,7 +212,6 @@ public class AddProgress extends Fragment {
 
         filled_exposed.setAdapter(adapter);
 
-        System.out.println("Lol");
 
     }
 }

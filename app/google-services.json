@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "501052451570",
+    "project_id": "mechanica-1674603366861",
+    "storage_bucket": "mechanica-1674603366861.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501052451570:android:95b31ae4f8f3b195903e6b",
+        "android_client_info": {
+          "package_name": "com.example.mechanica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "501052451570-1v7sjrkfvvsea2chev0dvuih1ffstdiu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mechanica",
+            "certificate_hash": "ff8d426a498a0e686c9e5033f00df286a52d4635"
+          }
+        },
+        {
+          "client_id": "501052451570-32q5sh3cl6bldaealdq912urim7r59b4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUY_qq1jPuGPptKIFvYrrv45yNFSdTGGU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "501052451570-32q5sh3cl6bldaealdq912urim7r59b4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

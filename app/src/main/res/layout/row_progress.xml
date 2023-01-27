@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#15202B"
+    android:background="@drawable/round_corners"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -10,13 +10,15 @@
         android:id="@+id/cv_pastProgress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#253341"
+        android:background="@drawable/round_corners"
         card_view:cardUseCompatPadding="true">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:background="#15202B"
+            android:background="@drawable/round_corners"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -74,20 +76,6 @@
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical">
-
-                <TextView
-                    android:id="@+id/txtView_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="05/02/2004"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="10dp"/>
-            </RelativeLayout>
 
 
         </FrameLayout>

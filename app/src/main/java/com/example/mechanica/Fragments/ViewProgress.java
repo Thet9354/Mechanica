@@ -1,39 +1,54 @@
 package com.example.mechanica.Fragments;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import com.example.mechanica.Adapter.PastProgressAdapter;
+import com.example.mechanica.Model.Progress;
 import com.example.mechanica.R;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.example.mechanica.SpaceItemDecoration;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class ViewProgress extends Fragment {
 
-    private BarChart bar_chart;
-    private PieChart pie_chart;
 
     private androidx.recyclerview.widget.RecyclerView rv_pastProgress;
 
     private Context mContext;
+
+    private String mName;
+
+    PastProgressAdapter pastProgressAdapter;
+
+    ArrayList<Progress> progressArrayList;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance("https://mechanica-1674603366861-default-rtdb.asia-southeast1.firebasedatabase.app/");
+    DatabaseReference databaseReference  = database.getReference().child("users");
+
+    FirebaseFirestore firestoreDB;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,63 +72,61 @@ public class ViewProgress extends Fragment {
 
     private void findViews(View v) {
 
-        bar_chart = v.findViewById(R.id.bar_chart);
-        pie_chart = v.findViewById(R.id.pie_chart);
-
         rv_pastProgress = v.findViewById(R.id.rv_pastProgress);
 
-        initUI();
+        getBundleData();
+
+        initRecView();
     }
 
-    private void initUI() {
+    private void getBundleData() {
 
-        //Initialize array list
-        ArrayList<BarEntry> barEntries = new ArrayList<>();
-        ArrayList<PieEntry> pieEntries = new ArrayList<>();
-
-        //Use for loop
-        for (int i = 0; i<12; i++)
-        {
-            //Convert to float
-            float value = (float) (i*10.0);
-            //Initialize bar chart
-            BarEntry barEntry = new BarEntry(i, value);
-            //Initialize pie chart entry
-            PieEntry pieEntry = new PieEntry(i,value);
-            //Add values in array list
-            barEntries.add(barEntry);
-            pieEntries.add(pieEntry);
-        }
-
-        //Initial pie data set
-        BarDataSet barDataSet = new BarDataSet(barEntries, "Progress");
-        //Set colors
-        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        //Hide draw values
-        barDataSet.setDrawValues(false);
-        //Set pie data
-        bar_chart.setData(new BarData(barDataSet));
-        //Set animation
-        bar_chart.animateY(3000);
-        //Hide description
-        bar_chart.getDescription().setText("Progress Chart");
-        bar_chart.getDescription().setTextColor(Color.BLUE);
-
-        //Initial pie data set
-        PieDataSet pieDataSet = new PieDataSet(pieEntries, "Student");
-        //Set colors
-        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        //Set pie data
-        pie_chart.setData(new PieData(pieDataSet));
-        //Set animation
-        pie_chart.animateXY(3000, 3000);
-        //Hide description
-        pie_chart.getDescription().setEnabled(false);
-
-
-        //Init RecyclerView
-
-
-
+        Bundle bundle = getArguments();
+        mName = bundle.getString("Name");
     }
+
+    private void initRecView() {
+
+
+        int spaceInPixels = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
+        rv_pastProgress.addItemDecoration(new SpaceItemDecoration(spaceInPixels));
+
+        rv_pastProgress.setHasFixedSize(true);
+        rv_pastProgress.setLayoutManager(new LinearLayoutManager(mContext));
+
+        firestoreDB = FirebaseFirestore.getInstance();
+        progressArrayList = new ArrayList<Progress>();
+        pastProgressAdapter = new PastProgressAdapter(mContext, progressArrayList);
+
+        rv_pastProgress.setAdapter(pastProgressAdapter);
+
+        EventChangeListener();
+    }
+
+    private void EventChangeListener() {
+
+        firestoreDB.collection("user").orderBy("Level", Query.Direction.ASCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                        if (error != null)
+                        {
+                            Log.e("Firestore error", error.getMessage());
+                            return;
+                        }
+
+                        for (DocumentChange dc : value.getDocumentChanges())
+                        {
+                            if (dc.getType() == DocumentChange.Type.ADDED)
+                            {
+                                progressArrayList.add(dc.getDocument().toObject(Progress.class));
+                            }
+                            pastProgressAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+    }
+
+
 }

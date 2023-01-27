@@ -3,4 +3,34 @@
     <string name="text2">Bahasa</string>
     <string name="done">Selesai</string>
     <string name="which_language_do_you_speak">Bahasa manakah anda bercakap?</string>
+
+    <string name="facebook_app_id">1156231605259378</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">4823c9f91b4e6de599ab903cf12746f7</string>
+
+    <string-array name="exercise_title">
+        <item name="Wrist flexion and extension">Wrist flexion and extension</item>
+        <item name="Hand flips">Hand flips</item>
+        <item name="Wrist radial and ulnar deviation">Wrist radial and ulnar deviation</item>
+        <item name="Wrist extensor stretch">Wrist extensor stretch</item>
+        <item name="Wrist flexor stretch">Wrist flexor stretch</item>
+    </string-array>
+
+    <string-array name="game_title">
+        <item name="Subway Surfer">Subway Surfer</item>
+        <item name="Super Mario">Super Mario</item>
+        <item name="Pac-man">Pac-man</item>
+        <item name="Temple Run">Temple Run</item>
+        <item name="Donkey Kong">Donkey Kong</item>
+        <item name="Need For Speed">Need For Speed</item>
+        <item name="Valorant">Valorant</item>
+    </string-array>
+
+    <string-array name="article_title">
+        <item name="Help for Wrist Pain. Feel Better Fast With These Exercises.">Help for Wrist Pain. Feel Better Fast With These Exercises.</item>
+        <item name="A Helpful Way to Stretch and Strengthen the Wrists">A Helpful Way to Stretch and Strengthen the Wrists</item>
+        <item name="Hand &amp; Wrist Exercises for keyboard users">Hand &amp; Wrist Exercises for keyboard users</item>
+        <item name="Easy Exercise Modifications for Wrist Pain">Easy Exercise Modifications for Wrist Pain</item>
+        <item name="Hey Moms, Get Wrist Pain When You Exercise? Try This.">Hey Moms, Get Wrist Pain When You Exercise? Try This.</item>
+    </string-array>
 </resources>

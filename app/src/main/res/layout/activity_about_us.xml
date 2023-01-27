@@ -32,7 +32,7 @@
         android:layout_width="410dp"
         android:layout_height="100dp"
         android:layout_marginTop="110dp"
-        android:text="      Welcome to \n      NS Nitro"
+        android:text="      Welcome to \n      Mechanica"
         android:textColor="@color/white"
         android:textSize="45dp"
         android:textStyle="bold"
@@ -76,6 +76,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/img_minimalDesign"
+            android:textColor="@color/white"
             android:text="Visual and functional way to keep track of your NS experience."
             android:textSize="12sp" />
     </RelativeLayout>
@@ -114,6 +115,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/img_productivity"
+            android:textColor="@color/white"
             android:text="Implement features to increase your overall productivity."
             android:textSize="12sp" />
     </RelativeLayout>
@@ -152,6 +154,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/img_personalAcc"
+            android:textColor="@color/white"
             android:text="Personalize your experience with the app to your preference."
             android:textSize="12sp" />
     </RelativeLayout>
@@ -190,6 +193,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/img_cloud"
+            android:textColor="@color/white"
             android:text="Rest easy knowing your personal information is stored securely."
             android:textSize="12sp" />
     </RelativeLayout>
